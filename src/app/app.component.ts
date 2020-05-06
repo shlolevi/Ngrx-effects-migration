@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
     this.error$ = this.store.select(store => store.shopping.error);
 
     // this.store.dispatch(new LoadShoppingAction());
-    this.store.dispatch(shoppingActions.LoadShoping);
+    this.store.dispatch(shoppingActions.LoadShoping());
   }
 
   addItem() {

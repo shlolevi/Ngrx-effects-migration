@@ -5,6 +5,7 @@ import {ShoppingService} from 'src/app/shopping.service';
 import * as shoppingActions from '../actions/shopping.actions';
 import {ShoppingItem} from '../models/shopping-item.model';
 import {Injectable} from '@angular/core';
+import {ShoppingActionTypes} from '../actions/shopping.actions';
 
 // ShoppingActionTypes,
 
@@ -13,7 +14,7 @@ export class ShoppingEffects {
 
   loadShopping$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(shoppingActions.LoadShoping),
+      ofType(ShoppingActionTypes.LOAD_SHOPPING),
       mergeMap(
         () => {
           return this.shoppingService.getShoppingItems()
@@ -31,12 +32,12 @@ export class ShoppingEffects {
 
   addShoppingItem$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(shoppingActions.deleteIte),
+      ofType(ShoppingActionTypes.ADD_ITEM),
       mergeMap(
-        (data) => this.shoppingService.deleteShoppingItem(data.payload)
+        (data: ReturnType<typeof shoppingActions.AddItem>) => this.shoppingService.addShoppingItem(data.payload)
           .pipe(
-            map(() => shoppingActions.deleteItemSuccess({payload: data.payload})),
-            catchError(error => of(shoppingActions.deleteItemFailer({payload: error})))
+            map(() => shoppingActions.AddItemSuccess({payload: data.payload})),
+            catchError(error => of(shoppingActions.AddItemFailer({payload: error})))
           )
       )
     )
@@ -44,9 +45,9 @@ export class ShoppingEffects {
 
   deleteShoppingItem$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(shoppingActions.deleteIte),
+      ofType(ShoppingActionTypes.DELETE_ITEM),
       mergeMap(
-        (data) => this.shoppingService.deleteShoppingItem(data.payload)
+        (data: ReturnType<typeof shoppingActions.deleteIte>) => this.shoppingService.deleteShoppingItem(data.payload)
           .pipe(
             map(() => shoppingActions.deleteItemSuccess({payload: data.payload})),
             catchError(error => of(shoppingActions.deleteItemFailer({payload: error})))

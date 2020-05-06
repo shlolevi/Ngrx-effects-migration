@@ -1,6 +1,6 @@
 import * as ShoppingActionTypes from '../actions/shopping.actions';
 import {ShoppingItem} from '../models/shopping-item.model';
-import {createReducer, on, Action, State} from '@ngrx/store';
+import {Action, createReducer, on, State} from '@ngrx/store';
 import * as shoppingActions from '../actions/shopping.actions';
 
 export interface ShoppingState {
@@ -16,7 +16,7 @@ const initialState: ShoppingState = {
   error: undefined
 };
 
-const ShoppingReducer = createReducer(
+export const ShoppingReducer = createReducer(
   initialState,
   on(shoppingActions.LoadShoping, shoppingActions.AddItem, shoppingActions.deleteIte,
     state => ({
