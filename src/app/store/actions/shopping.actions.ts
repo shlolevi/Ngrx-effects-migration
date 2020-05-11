@@ -27,6 +27,8 @@ export const deleteIte = createAction('[SHOPPING] Delete Item', props<{ payload:
 export const deleteItemSuccess = createAction('[SHOPPING] Delete Item Success', props<{ payload: string }>());
 export const deleteItemFailer = createAction('[SHOPPING] Delete Item Failure', props<{ payload: Error }>());
 
+export const deleteAll = createAction(('[shopping] - delete all'));
+
 // export class LoadShoppingAction implements Action {
 //   readonly type = ShoppingActionTypes.LOAD_SHOPPING;
 // }
